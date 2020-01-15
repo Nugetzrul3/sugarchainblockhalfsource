@@ -18,22 +18,27 @@
             }
             p {
                 color: brown;
+                font-size: 20pt;
+            }
+            .jumbotron{
+                position: relative;
+                color: black;
             }
         </style>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <title>Sugarchain Block Reward Countdown</title>
         <link rel='icon' href="logo.ico" type="image/x-icon"/>
     </head>
-    <div class="jumbotron text-center">
-        <h1>Sugarchain Block Reward Half Countdown!!</h1>
+    <h1>Sugarchain Block Reward Half Countdown!!</h1>
+    <div style="background: darkblue !important" class="jumbotron text-center">
+        <h2>Time left in hours: <span id="hours">loading...</span></h2>
     </div>
     <body>
         <div class="container">
             <div class="row">
-                <div class="col-0">
+                <div style="background: darkgray !important"class="col-12">
                 <p>Block Height: <span id="listblocks">loading...</span></p>
                 </div>
-        <!--<div class="col-7-11"><p>Time left in hours: <span id="hours">loading...</span></p></div>-->
             </div>
         </div>
         <br>
