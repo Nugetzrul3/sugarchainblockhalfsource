@@ -118,4 +118,119 @@
             }, 1000)
         </script>
     </body>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        <style>
+
+            h1 {
+                color: aquamarine;
+            }
+            body {
+                color: black;
+            }
+            p {
+                color: brown;
+            }
+        </style>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <title>Sugarchain Block Reward Countdown</title>
+        <link rel='icon' href="logo.ico" type="image/x-icon"/>
+    </head>
+    <div class="jumbotron text-center">
+        <h1>Sugarchain Block Reward Half Countdown!!</h1>
+    </div>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-0">
+                <p>Block Height: <span id="listblocks">loading...</span></p>
+                </div>
+        <!--<div class="col-7-11"><p>Time left in hours: <span id="hours">loading...</span></p></div>-->
+            </div>
+        </div>
+        <br>
+        <br>
+        <p>Block Reward: <span id="reward">loading...</span></p>
+        <br>
+        <p>Remaining Blocks Left: <span id="blkleft">loading...</span></p>
+
+        <script>
+            api = "https://api.sugarchain.org"
+
+            function getBlockHeight() {
+                return Promise.resolve($.ajax({
+                    url: api + "/info",
+                    dataType: "json",
+                    type: "GET"
+                }))
+            }
+
+            function printData() {
+                getBlockHeight().then(function(data) {
+                    var height = data.result.blocks
+                    $("#listblocks").text(height)
+                })
+            }
+
+            function getTime() {
+                getBlockHeight().then(function(data) {
+                    var height = data.result.blocks
+                    var time = height * 5
+                    //$("#seconds").text(time)
+                    //$("#minutes").text(time/60)
+                    //$("#hours").text(time/60/60)
+                })
+            }
+            function getBlockReward() {
+                getBlockHeight().then(function(data) {
+                    var getReward = parseInt(data.result.reward)
+                    var blockreward = getReward / 100000000
+                    $("#reward").text(blockreward)
+                })
+            }
+            function secondsToHms(d) {
+                d = Number(d);
+                
+                var hours = Math.floor(d / 3600);
+                var m = Math.floor(d % 3600 / 60);
+                var s = Math.floor(d % 3600 % 60);
+                var day = Math.floor(hours / 24)
+                var h = hours - (day * 24)
+
+                return (day) + " Days, " + (h) + ":" + ('0' + m).slice(-2) + ":" + ('0' + s).slice(-2);
+            }
+            n = 1
+            function getRemainingBlocksLeft() {
+                getBlockHeight().then(function(data) {
+                half = 12500000 * n
+                if(document.getElementById("blkleft").innerHTML == "0") {
+                    n++;
+                } else if (document.getElementById("blkleft").innerHTML > "0") {
+                    n;
+                }
+                height = data.result.blocks
+                remainheight = half-height
+                $("#blkleft").text(remainheight)
+                //$("#seconds").text(remainheight * 5)
+                //$("#minutes").text((remainheight * 5) / 60)
+                $("#hours").text(secondsToHms(remainheight * 5))
+                })
+                }
+
+            setInterval(function() {
+                printData()
+                getTime()
+                getBlockReward()
+                getRemainingBlocksLeft()
+            }, 1000)
+        </script>
+    </body>
 </html>
