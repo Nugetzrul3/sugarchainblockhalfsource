@@ -8,13 +8,17 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        <script async defer src="https://buttons.github.io/buttons.js"></script>
         <style>
 
             h1 {
-                color: aquamarine;
+                color: aqua;
             }
             body {
                 color: black;
+            }
+            html, body{
+                height: 100%;
             }
             p {
                 color: brown;
@@ -24,14 +28,28 @@
                 position: relative;
                 color: black;
             }
+            .footer{
+                position: fixed;
+                height: fit-content;
+                left: 0;
+                bottom: 0;
+                width: 100%;
+                background-color: whitesmoke;
+                color: white;
+            }
+            .github-button{
+                position: right;
+            }
         </style>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <title>Sugarchain Block Reward Countdown</title>
+        <div class="title">
+            <title>Sugarchain Reward Half Countdown</title>
+        </div>
         <link rel='icon' href="logo.ico" type="image/x-icon"/>
     </head>
-    <h1>Sugarchain Block Reward Half Countdown!</h1>
-    <div style="background: darkblue !important" class="jumbotron text-center">
-        <h2>Time left in hours: <span id="hours">loading...</span></h2>
+    <h1 style="text-align: center"><a href="https://sugarchain.org" target="_blank"><img src="logo.png" style="position: relative; right: 259px;"></a>Sugarchain Block Reward Half Countdown!</h1>
+    <div style="background: aquamarine !important" class="jumbotron text-center">
+        <h2 ><span id="hours">loading...</span></h2 >
     </div>
     <body>
         <div class="container">
@@ -46,6 +64,13 @@
         <p>Block Reward: <span id="reward">loading...</span></p>
         <br>
         <p>Remaining Blocks Left: <span id="blkleft">loading...</span></p>
+    </body>
+
+    <footer>
+        <div class="footer text-center">
+            <a class="github-button" href="https://github.com/Nugetzrul3/Sugarchain-blockhalf.com" data-color-scheme="no-preference: dark; light: dark; dark: dark;" data-icon="octicon-star" data-show-count="true" aria-label="Star Nugetzrul3/Sugarchain-blockhalf.com on GitHub">Star</a>
+        </div>
+    </footer>
 
         <script>
             api = "https://api.sugarchain.org"
@@ -117,5 +142,4 @@
                 getRemainingBlocksLeft()
             }, 1000)
         </script>
-    </body>
 </html>
