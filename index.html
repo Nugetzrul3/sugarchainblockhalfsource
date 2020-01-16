@@ -55,18 +55,25 @@
         <h2 ><span id="hours">loading...</span></h2 >
     </div>
     <body>
-        <div class="container">
-            <div class="row">
-                <div style="background: darkgray !important"class="col-12">
-                <p>Block Height: <span id="listblocks">loading...</span></p>
-                </div>
-            </div>
-        </div>
-        <br>
-        <br>
-        <p>Block Reward: <span id="reward">loading...</span></p>
-        <br>
-        <p>Remaining Blocks Left: <span id="blkleft">loading...</span></p>
+        <table class="table table-striped   ">
+            <tbody>
+                <tr>
+                    <th scope="row">
+        <td><p>Block Height: <span id="listblocks">loading...</span></p></td>
+                    </th>
+                </tr>
+                <tr>
+                    <th scope="row">
+        <td><p>Block Reward: <span id="reward">loading...</span></p></td>
+                    </th>
+                </tr>
+                <tr>
+                    <th scope="row">
+        <td><p>Remaining Blocks Left: <span id="blkleft">loading...</span></p></td>
+                    </th>
+                </tr>
+            </tbody>
+        </table>
     </body>
 
     <footer>
@@ -118,7 +125,7 @@
                 var day = Math.floor(hours / 24)
                 var h = hours - (day * 24)
 
-                return (day) + " Days, " + (h) + ":" + ('0' + m).slice(-2) + ":" + ('0' + s).slice(-2);
+                return (day) + " Days, " + (h) + 'h' +":" + ('0' + m).slice(-2) + 'm' + ":" + ('0' + s).slice(-2) + 's';
             }
             n = 1
             function getRemainingBlocksLeft() {
