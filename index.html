@@ -23,7 +23,7 @@
             }
             p {
                 color: #696969;
-                font-size: 20pt;
+                font-size: 15pt;
             }
             .jumbotron{
                 position: relative;
@@ -52,7 +52,9 @@
     </div>
     <h1 style="text-align: center">Sugarchain Block Reward Half Countdown!</h1>
     <div style="background: #696969 !important" class="jumbotron text-center">
-        <h2 ><span id="hours">loading...</span></h2 >
+        <h2 ><span id="hours">loading...</span><br>
+        Left until halving
+        </h2>
     </div>
     <body>
         <table class="table table-striped   ">
@@ -73,6 +75,18 @@
                     <th scope="row">
         <td><p>Remaining Blocks Left: </p></td>
         <td align="right"><p><span id="blkleft">loading...</span></p></td>
+                    </th>
+                </tr>
+                <tr>
+                    <th scope="row">
+        <td><p>Current Network Difficulty: </p></td>
+        <td align="right"><p><span id="netDifficulty">loading...</span></p></td>
+                    </th>
+                </tr>
+                <tr>
+                    <th scope="row">
+        <td><p>Current Network Hashrate: </p></td>
+        <td align="right"><p><span id="netHashrate">loading...</span></p></td>
                     </th>
                 </tr>
             </tbody>
@@ -107,9 +121,6 @@
                 getBlockHeight().then(function(data) {
                     var height = data.result.blocks
                     var time = height * 5
-                    //$("#seconds").text(time)
-                    //$("#minutes").text(time/60)
-                    //$("#hours").text(time/60/60)
                 })
             }
             function getBlockReward() {
@@ -142,17 +153,31 @@
                 height = data.result.blocks
                 remainheight = half-height
                 $("#blkleft").text(remainheight)
-                //$("#seconds").text(remainheight * 5)
-                //$("#minutes").text((remainheight * 5) / 60)
                 $("#hours").text(secondsToHms(remainheight * 5))
                 })
                 }
+
+            function getNetDifficulty() {
+                getBlockHeight().then(function(data) {
+                    getnetDif = parseFloat(data.result.difficulty)
+                    $("#netDifficulty").text(getnetDif)
+                })
+            }
+            
+            function getNetHash() {
+                getBlockHeight().then(function(data) {
+                    netHash = Math.round(((data.result.nethash) / 1000000) * 100) / 100
+                    $("#netHashrate").text(netHash + " MH/S")
+                })
+            }
 
             setInterval(function() {
                 printData()
                 getTime()
                 getBlockReward()
                 getRemainingBlocksLeft()
+                getNetDifficulty()
+                getNetHash()
             }, 1000)
         </script>
 </html>
