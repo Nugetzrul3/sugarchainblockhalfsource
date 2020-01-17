@@ -87,6 +87,12 @@
         <td align="right"><p><span id="netHashrate">loading...</span></p></td>
                     </th>
                 </tr>
+                <tr>
+                    <th scope="row">
+        <td><p>Approx. Sugar Left to Mine: </p></td>
+        <td align="right"><p><span id="sugarLeft">loading...</span></p></td>
+                    </th>
+                </tr>
             </tbody>
         </table>
     </body>
@@ -167,6 +173,11 @@
                     $("#netHashrate").text(netHash + " MH/S")
                 })
             }
+            
+            function getAmountSugarLeft() {
+                amountLeft = Math.round((document.getElementById("blkleft").innerHTML) * (document.getElementById("reward").innerHTML))
+                $("#sugarLeft").text(amountLeft)
+            }
 
             setInterval(function() {
                 printData()
@@ -175,6 +186,7 @@
                 getRemainingBlocksLeft()
                 getNetDifficulty()
                 getNetHash()
+                getAmountSugarLeft()
             }, 1000)
         </script>
 </html>
