@@ -96,7 +96,13 @@
                 <tr>
                     <th scope="row">
         <td><p>Current Price SUGAR/USD: </p></td>
-        <td align="right"><p><span id="price">loading...</span></p></td>
+        <td align="right"><p><span id="priceusd">loading...</span></p></td>
+                    </th>
+                </tr>
+                <tr>
+                    <th scope="row">
+        <td><p>Current Price SUGAR/BTC: </p></td>
+        <td align="right"><p><span id="pricebtc">loading...</span></p></td>
                     </th>
                 </tr>
             </tbody>
@@ -110,11 +116,10 @@
 
         <script>
             api = "https://api.sugarchain.org"
-            pricesugar = "https://api.coingecko.com/api/v3/simple/price?ids=sugarchain&vs_currencies=usd"
 
             function getPrice() {
                 return Promise.resolve($.ajax({
-                    url: pricesugar,
+                    url: api + "/price",
                     dataType: 'json',
                     type: 'GET',
                 }))
@@ -194,10 +199,14 @@
                 $("#sugarLeft").text(amountLeft)
             }
 
-            function getCurrentPriceUSD() {
+            function getCurrentPrice() {
                 getPrice().then(function(data) {
-                    price = parseFloat(data.sugarchain.usd)
-                    $("#price").text(price)
+                    priceUSD = parseFloat(data.result.usd)
+                    getpriceBTC = data.result.btc
+                    priceBTC = Number(getpriceBTC).toLocaleString(undefined, {minimumFractionDigits: 8, maximumFractionDigits: 8})
+                    $("#priceusd").text("$" + priceUSD)
+                    $("#pricebtc").text(priceBTC + "BTC")
+
                 })
             }
 
@@ -209,7 +218,7 @@
                 getNetDifficulty()
                 getNetHash()
                 getAmountSugarLeft()
-                getCurrentPriceUSD()
+                getCurrentPrice()
             }, 1000)
         </script>
 </html>
