@@ -93,6 +93,12 @@
         <td align="right"><p><span id="sugarLeft">loading...</span></p></td>
                     </th>
                 </tr>
+                <tr>
+                    <th scope="row">
+        <td><p>Current Price SUGAR/USD: </p></td>
+        <td align="right"><p><span id="price">loading...</span></p></td>
+                    </th>
+                </tr>
             </tbody>
         </table>
     </body>
@@ -104,6 +110,15 @@
 
         <script>
             api = "https://api.sugarchain.org"
+            price = "https://api.coingecko.com/api/v3/simple/price?ids=sugarchain&vs_currencies=usd"
+
+            function getPrice() {
+                return Promise.resolve($.ajax({
+                    url: price,
+                    dataType: 'json',
+                    type: 'GET',
+                }))
+            }
 
             function getBlockHeight() {
                 return Promise.resolve($.ajax({
@@ -179,6 +194,13 @@
                 $("#sugarLeft").text(amountLeft)
             }
 
+            function getCurrentPriceUSD() {
+                getPrice().then(function(data) {
+                    price = parseFloat(data.sugarchain.usd)
+                    $("#price")
+                })
+            }
+
             setInterval(function() {
                 printData()
                 getTime()
@@ -187,6 +209,7 @@
                 getNetDifficulty()
                 getNetHash()
                 getAmountSugarLeft()
+                getCurrentPriceUSD()
             }, 1000)
         </script>
 </html>
