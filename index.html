@@ -110,11 +110,11 @@
 
         <script>
             api = "https://api.sugarchain.org"
-            price = "https://api.coingecko.com/api/v3/simple/price?ids=sugarchain&vs_currencies=usd"
+            pricesugar = "https://api.coingecko.com/api/v3/simple/price?ids=sugarchain&vs_currencies=usd"
 
             function getPrice() {
                 return Promise.resolve($.ajax({
-                    url: price,
+                    url: pricesugar,
                     dataType: 'json',
                     type: 'GET',
                 }))
@@ -197,7 +197,7 @@
             function getCurrentPriceUSD() {
                 getPrice().then(function(data) {
                     price = parseFloat(data.sugarchain.usd)
-                    $("#price")
+                    $("#price").text(price)
                 })
             }
 
