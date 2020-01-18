@@ -1,4 +1,4 @@
-# Sugarchain-blockhalf.com
+# Sugarchain-blockhalf.github.io
 
 Simple website that tells when Sugarchain block reward will be halved. 
 
